@@ -34,7 +34,7 @@ export function DashboardStats() {
         label="Active Applications"
         value={stats.activeApplications ?? 0}
         icon={FileText}
-        trend={stats.recentApplications !== undefined ? `${stats.recentApplications} this month` : undefined}
+        trend={Array.isArray(stats.recentApplications) ? `${stats.recentApplications.length} this month` : undefined}
         trendDirection="neutral"
       />
       <StatCard

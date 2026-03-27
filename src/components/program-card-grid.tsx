@@ -14,13 +14,14 @@ import { Users } from "lucide-react";
 const categories = [
   "All",
   "Housing",
-  "Employment",
-  "HealthCare",
-  "MentalHealth",
-  "SubstanceAbuse",
-  "Education",
   "FoodAssistance",
+  "MentalHealth",
+  "Substance",
+  "Employment",
+  "Education",
   "LegalAid",
+  "YouthServices",
+  "SeniorServices",
   "Other",
 ];
 
@@ -71,7 +72,7 @@ export function ProgramCardGrid() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {programs.map((program: any) => {
             const enrolled = program.currentEnrollment ?? 0;
-            const capacity = program.capacity ?? 1;
+            const capacity = program.totalCapacity ?? 1;
             const utilization = Math.round((enrolled / capacity) * 100);
 
             return (
