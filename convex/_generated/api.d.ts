@@ -8,13 +8,41 @@
  * @module
  */
 
+import type * as applications from "../applications.js";
+import type * as auditLogs from "../auditLogs.js";
+import type * as clients from "../clients.js";
+import type * as dashboard from "../dashboard.js";
+import type * as enrollments from "../enrollments.js";
+import type * as intakeForms from "../intakeForms.js";
+import type * as notifications from "../notifications.js";
+import type * as programSlots from "../programSlots.js";
+import type * as programs from "../programs.js";
+import type * as seed from "../seed.js";
+import type * as staffAssignments from "../staffAssignments.js";
+import type * as users from "../users.js";
+import type * as waitlistEntries from "../waitlistEntries.js";
+
 import type {
   ApiFromModules,
   FilterApi,
   FunctionReference,
 } from "convex/server";
 
-declare const fullApi: ApiFromModules<{}>;
+declare const fullApi: ApiFromModules<{
+  applications: typeof applications;
+  auditLogs: typeof auditLogs;
+  clients: typeof clients;
+  dashboard: typeof dashboard;
+  enrollments: typeof enrollments;
+  intakeForms: typeof intakeForms;
+  notifications: typeof notifications;
+  programSlots: typeof programSlots;
+  programs: typeof programs;
+  seed: typeof seed;
+  staffAssignments: typeof staffAssignments;
+  users: typeof users;
+  waitlistEntries: typeof waitlistEntries;
+}>;
 
 /**
  * A utility for referencing Convex functions in your app's public API.
