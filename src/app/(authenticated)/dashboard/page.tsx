@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { DashboardStats } from "@/components/dashboard-stats";
 
 export default function DashboardPage() {

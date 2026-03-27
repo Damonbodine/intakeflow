@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ApplicationForm } from "@/components/application-form";
 
 export default function NewApplicationPage() {

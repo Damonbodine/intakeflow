@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ProgramCardGrid } from "@/components/program-card-grid";
 
 export default function ProgramsPage() {

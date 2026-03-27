@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ApplicationDataTable } from "@/components/application-data-table";
 
 export default function ApplicationsPage() {

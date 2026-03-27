@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ClientDataTable } from "@/components/client-data-table";
 
 export default function ClientsPage() {
