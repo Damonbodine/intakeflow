@@ -1,0 +1,18 @@
+**Run complete.** All 30 steps completed successfully, 0 failed.
+
+## Summary
+
+Added 4 AI features to the IntakeFlow app using OpenRouter API (`nvidia/nemotron-3-super-120b-a12b:free`):
+
+**Files Created (6):**
+- `convex/ai.ts` — Actions for all 4 AI features (priority scoring, needs assessment, waitlist optimization, communication drafting)
+- `convex/aiHelpers.ts` — Internal queries/mutations for data access and AI result storage
+- `src/components/priority-score-card.tsx` — Score display with factor breakdown
+- `src/components/needs-assessment-panel.tsx` — Structured assessment viewer
+- `src/components/waitlist-advisor-panel.tsx` — Enrollment recommendation panel
+- `src/components/communication-drafter.tsx` — Message drafting with type selection
+
+**Files Modified (3):**
+- `convex/schema.ts` — Added `aiPriorityScores` and `aiNeedsAssessments` tables
+- `src/app/(authenticated)/clients/[id]/page.tsx` — Integrated priority score + needs assessment
+- `src/app/(authenticated)/waitlist/page.tsx` — Integrated advisor panel + communication drafter
