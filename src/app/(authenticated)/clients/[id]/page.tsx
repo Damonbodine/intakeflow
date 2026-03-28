@@ -5,14 +5,22 @@ import { useParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/status-badge";
+import { PriorityScoreCard } from "@/components/priority-score-card";
+import { NeedsAssessmentPanel } from "@/components/needs-assessment-panel";
 import type { Id } from "@convex/_generated/dataModel";
 
 export default function ClientDetailPage() {
   const params = useParams();
-  const client = useQuery(api.clients.getById, { id: params.id as Id<"clients"> });
+  const clientId = params.id as Id<"clients">;
+  const client = useQuery(api.clients.getById, { id: clientId });
+  const intakeForms = useQuery(api.intakeForms.listByClient, { clientId });
 
   if (client === undefined) return <div className="p-8 text-muted-foreground">Loading...</div>;
   if (!client) return <div className="p-8 text-muted-foreground">Client not found</div>;
+
+  const latestCompletedForm = intakeForms
+    ?.filter((f) => f.status === "Completed")
+    .sort((a, b) => (b.completedAt ?? 0) - (a.completedAt ?? 0))[0];
 
   return (
     <div className="space-y-6">
@@ -43,6 +51,10 @@ export default function ClientDetailPage() {
             {client.address && <div className="flex justify-between"><span className="text-muted-foreground">Address</span><span>{client.address}, {client.city} {client.state} {client.zipCode}</span></div>}
           </CardContent>
         </Card>
+      </div>
+      <div className="grid grid-cols-2 gap-6">
+        <PriorityScoreCard clientId={clientId} intakeFormId={latestCompletedForm?._id} />
+        <NeedsAssessmentPanel clientId={clientId} intakeFormId={latestCompletedForm?._id} />
       </div>
     </div>
   );

@@ -191,6 +191,29 @@ export default defineSchema({
   })
     .index("by_userId", ["userId"])
     .index("by_userId_isRead", ["userId", "isRead"]),
+  aiPriorityScores: defineTable({
+    clientId: v.id("clients"),
+    intakeFormId: v.id("intakeForms"),
+    score: v.number(),
+    factors: v.string(),
+    summary: v.string(),
+    generatedAt: v.number(),
+  })
+    .index("by_clientId", ["clientId"])
+    .index("by_intakeFormId", ["intakeFormId"]),
+  aiNeedsAssessments: defineTable({
+    clientId: v.id("clients"),
+    intakeFormId: v.id("intakeForms"),
+    presentingNeeds: v.string(),
+    strengths: v.string(),
+    barriers: v.string(),
+    recommendedPrograms: v.string(),
+    safetyConcerns: v.string(),
+    summary: v.string(),
+    generatedAt: v.number(),
+  })
+    .index("by_clientId", ["clientId"])
+    .index("by_intakeFormId", ["intakeFormId"]),
   auditLogs: defineTable({
     userId: v.id("users"),
     action: v.union(v.literal("Create"), v.literal("Update"), v.literal("Delete"), v.literal("StatusChange"), v.literal("Enroll"), v.literal("Discharge"), v.literal("Login"), v.literal("Export")),
