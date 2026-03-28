@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import {
@@ -21,6 +21,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { withPreservedDemoQuery } from "@/lib/demo";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -37,6 +38,7 @@ const navItems = [
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const user = useQuery(api.users.getCurrentUser);
   const unreadCount = useQuery(
     api.notifications.getUnreadCount,
@@ -56,7 +58,7 @@ export function AppSidebar() {
           return (
             <Link
               key={item.href}
-              href={item.href}
+              href={withPreservedDemoQuery(item.href, searchParams)}
               className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 isActive
@@ -72,7 +74,7 @@ export function AppSidebar() {
       </nav>
 
       <div className="border-t border-sidebar-border p-3">
-        <Link href="/notifications">
+        <Link href={withPreservedDemoQuery("/notifications", searchParams)}>
           <Button variant="ghost" className="w-full justify-start gap-3 text-sidebar-foreground">
             <Bell className="h-4 w-4" />
             Notifications
@@ -83,7 +85,7 @@ export function AppSidebar() {
             )}
           </Button>
         </Link>
-        <Link href="/search">
+        <Link href={withPreservedDemoQuery("/search", searchParams)}>
           <Button variant="ghost" className="w-full justify-start gap-3 text-sidebar-foreground">
             <Search className="h-4 w-4" />
             Search

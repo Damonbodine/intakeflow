@@ -10,7 +10,7 @@ export function DashboardStats() {
 
   if (!stats) {
     return (
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-demo="dashboard-stats">
         {[1, 2, 3, 4].map((i) => (
           <div key={i} className="h-28 animate-pulse rounded-lg bg-muted" />
         ))}
@@ -19,7 +19,7 @@ export function DashboardStats() {
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-demo="dashboard-stats">
       <StatCard
         label="Total Clients"
         value={stats.totalClients ?? 0}

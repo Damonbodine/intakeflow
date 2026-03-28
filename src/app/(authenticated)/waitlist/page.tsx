@@ -22,7 +22,7 @@ export default function WaitlistPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-demo="waitlist-workspace">
       <h1 className="text-2xl font-bold">Waitlist</h1>
       <div className="mb-4">
         <Select onValueChange={(v) => { if (v) { setSelectedProgram(v); setSelectedClient(null); } }} value={selectedProgram}>

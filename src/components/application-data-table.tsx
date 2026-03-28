@@ -15,11 +15,14 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { StatusBadge } from "@/components/status-badge";
 import { Badge } from "@/components/ui/badge";
+import { useSearchParams } from "next/navigation";
+import { withPreservedDemoQuery } from "@/lib/demo";
 
 const statusOptions = ["All", "Draft", "Submitted", "UnderReview", "Screening", "Approved", "Rejected", "Waitlisted", "Enrolled"];
 
 export function ApplicationDataTable() {
   const [statusFilter, setStatusFilter] = useState<string | undefined>(undefined);
+  const searchParams = useSearchParams();
   const applications = useQuery(
     api.applications.list,
     statusFilter && statusFilter !== "All" ? { status: statusFilter } : {}
@@ -28,7 +31,7 @@ export function ApplicationDataTable() {
   if (!applications) return <div className="p-8 text-center text-muted-foreground">Loading...</div>;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-demo="applications-table">
       <div className="flex items-center gap-4">
         <Select onValueChange={(v: any) => setStatusFilter(v === "All" ? undefined : String(v))}>
           <SelectTrigger className="w-48">
@@ -59,10 +62,14 @@ export function ApplicationDataTable() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {applications.map((app: any) => (
+              {applications.map((app: any, index: number) => (
                 <TableRow key={app._id} className="cursor-pointer hover:bg-muted/50">
                   <TableCell>
-                    <Link href={`/applications/${app._id}`} className="font-medium text-primary hover:underline">
+                    <Link
+                      href={withPreservedDemoQuery(`/applications/${app._id}`, searchParams)}
+                      className="font-medium text-primary hover:underline"
+                      data-demo={index === 0 ? "primary-application-link" : undefined}
+                    >
                       {app.clientName ?? "Unknown Client"}
                     </Link>
                   </TableCell>

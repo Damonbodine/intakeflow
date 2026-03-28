@@ -13,7 +13,7 @@ export default function ApplicationDetailPage() {
   if (!application) return <div className="p-8 text-muted-foreground">Application not found</div>;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-demo="application-detail">
       <div className="flex items-center gap-4">
         <h1 className="text-2xl font-bold">Application Detail</h1>
         <StatusBadge status={application.status} />
